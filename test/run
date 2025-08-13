@@ -1,0 +1,10 @@
+#!/usr/bin/bash
+
+gcc linalg.c -o test_linalg.out
+./test_linalg.out
+if [ $? != 0 ]; then
+	echo -e "\x1B[31mFAIL >>\x1B[0m check above logs for details"
+	exit 1
+fi
+echo -e "\x1B[32mALL TESTS PASS\x1B[0m"
+exit 0
