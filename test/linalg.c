@@ -25,17 +25,24 @@ void pass(const char *format, ...) {
     va_end(args);
 }
 
+void _test_vector2_f32_scale(const char *fname, float v1, float v2, float scalar, float e1, float e2) {
+	Vector2_F32 vec = {v1, v2};
+	mdwi_vector2_f32_scale(vec, scalar);
+	assertf(vec[0] == e1, "%s: vec[0] = %f: expected %f", fname, e1, vec[0]);
+	assertf(vec[1] == e2, "%s: vec[1] = %f: expected %f", fname, e2, vec[1]);
+}
+
 void test_vector2_f32_scale() {
 	char fname[] = "test_vector_2_f32_scale";
-	Vector2_F32 vec = {2.0,2.0};
-	mdwi_vector2_f32_scale(vec, 2.0);
-	assertf(vec[0] == 4.0, "%s: vec[0] = %f: expected %f", fname, 4.0, vec[0]);
-	assertf(vec[1] == 4.0, "%s: vec[1] = %f: expected %f", fname, 4.0, vec[0]);
 
-	vec[0] = 16.0; vec[1] = 2.0;
-	mdwi_vector2_f32_scale(vec, 1);
-	assertf(vec[0] == 16.0, "%s: vec[0] = %f: expected %f", fname, 16.0, vec[0]);
-	assertf(vec[1] == 2.0,  "%s: vec[1] = %f: expected %f", fname, 2.0, vec[0]);
+	float v1 = 2.0, v2 = 2.0, scalar = 2.0, e1 = 4.0, e2 = 4.0;
+	_test_vector2_f32_scale(fname, v1, v2, scalar, e1, e2);
+
+	v1 = 16.0; v2 = 2.0; scalar = 1.0; e1 = 16.0; e2 = 2.0;
+	_test_vector2_f32_scale(fname, v1, v2, scalar, e1, e2);
+
+	v1 = -1.0; v2 = -2.0; scalar = 1.0; e1 = -1.0; e2 = -2.0;
+	_test_vector2_f32_scale(fname, v1, v2, scalar, e1, e2);
 
 	pass("%s", fname);
 }
