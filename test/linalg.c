@@ -29,8 +29,8 @@ void _test_vector2_f32_scale(const char *fname, float v1, float v2, float scalar
 	static int test_case = 1;
 	Vector2_F32 vec = {v1, v2};
 	mdwi_vector2_f32_scale(vec, scalar);
-	assertf(vec[0] == e1, "%s: test case %d: vec[0] = %f: expected %f", fname, test_case, e1, vec[0]);
-	assertf(vec[1] == e2, "%s: test case %d: vec[1] = %f: expected %f", fname, test_case, e2, vec[1]);
+	assertf(vec[0] == e1, "%s: test case %d: vec[0] = %f: expected %f", fname, test_case, vec[0], e1);
+	assertf(vec[1] == e2, "%s: test case %d: vec[1] = %f: expected %f", fname, test_case, vec[1], e2);
 	++test_case;
 }
 void test_vector2_f32_scale() {
@@ -52,9 +52,9 @@ void _test_vector3_f32_scale(const char *fname, float v1, float v2, float v3, fl
 	static int test_case = 1;
 	Vector3_F32 vec = {v1, v2, v3};
 	mdwi_vector3_f32_scale(vec, scalar);
-	assertf(vec[0] == e1, "%s: test case %d: vec[0] = %f: expected %f", fname, test_case, e1, vec[0]);
-	assertf(vec[1] == e2, "%s: test case %d: vec[1] = %f: expected %f", fname, test_case, e2, vec[1]);
-	assertf(vec[2] == e3, "%s: test case %d: vec[2] = %f: expected %f", fname, test_case, e3, vec[2]);
+	assertf(vec[0] == e1, "%s: test case %d: vec[0] = %f: expected %f", fname, test_case, vec[0], e1);
+	assertf(vec[1] == e2, "%s: test case %d: vec[1] = %f: expected %f", fname, test_case, vec[1], e2);
+	assertf(vec[2] == e3, "%s: test case %d: vec[2] = %f: expected %f", fname, test_case, vec[2], e3);
 	++test_case;
 }
 void test_vector3_f32_scale() {
@@ -79,10 +79,10 @@ void _test_vector4_f32_scale(const char *fname, float v1, float v2, float v3, fl
 	static int test_case = 1;
 	Vector4_F32 vec = {v1, v2, v3, v4};
 	mdwi_vector4_f32_scale(vec, scalar);
-	assertf(vec[0] == e1, "%s: test case %d: vec[0] = %f: expected %f", fname, test_case, e1, vec[0]);
-	assertf(vec[1] == e2, "%s: test case %d: vec[1] = %f: expected %f", fname, test_case, e2, vec[1]);
-	assertf(vec[2] == e3, "%s: test case %d: vec[2] = %f: expected %f", fname, test_case, e3, vec[2]);
-	assertf(vec[3] == e4, "%s: test case %d: vec[3] = %f: expected %f", fname, test_case, e4, vec[3]);
+	assertf(vec[0] == e1, "%s: test case %d: vec[0] = %f: expected %f", fname, test_case, vec[0], e1);
+	assertf(vec[1] == e2, "%s: test case %d: vec[1] = %f: expected %f", fname, test_case, vec[1], e2);
+	assertf(vec[2] == e3, "%s: test case %d: vec[2] = %f: expected %f", fname, test_case, vec[2], e3);
+	assertf(vec[3] == e4, "%s: test case %d: vec[3] = %f: expected %f", fname, test_case, vec[3], e4);
 	++test_case;
 }
 void test_vector4_f32_scale() {
@@ -103,10 +103,107 @@ void test_vector4_f32_scale() {
 	pass("%s", fname);
 }
 
+void _test_vector2_f32_transform_matrix2_f32(const char *fname, Vector2_F32 in, Matrix2_F32 mat, Vector2_F32 ex) {
+	static int test_case = 1;
+	mdwi_vector2_f32_transform_matrix2_f32(in, mat);
+	assertf(in[0] == ex[0], "%s: test case %d: vec[0] = %f: expected %f", fname, test_case, in[0], ex[0]);
+	assertf(in[1] == ex[1], "%s: test case %d: vec[1] = %f: expected %f", fname, test_case, in[1], ex[1]);
+	++test_case;
+}
+void test_vector2_f32_transform_matrix2_f32() {
+	char fname[] = "mdwi_vector2_f32_transform_matrix2_f32";
+
+	Vector2_F32 vec = {  1.0,
+											 2.0 };
+	Matrix2_F32 mat = { {1.0, 0.0},
+											{0.0, 1.0} };
+	Vector2_F32 ex =  {  1.0,
+											 2.0 };
+
+	_test_vector2_f32_transform_matrix2_f32(fname, vec, mat, ex);
+
+	mat[0][0] = 0.0; mat[1][0] = 1.0; vec[0] = 2.5; ex[0] = 3.1; 
+	mat[0][1] = 1.0; mat[1][1] = 0.0; vec[1] = 3.1; ex[1] = 2.5;
+	_test_vector2_f32_transform_matrix2_f32(fname, vec, mat, ex);
+
+	pass("%s", fname);
+}
+
+void _test_vector3_f32_transform_matrix3_f32(const char *fname, Vector3_F32 in, Matrix3_F32 mat, Vector3_F32 ex) {
+	static int test_case = 1;
+	mdwi_vector3_f32_transform_matrix3_f32(in, mat);
+	assertf(in[0] == ex[0], "%s: test case %d: vec[0] = %f: expected %f", fname, test_case, in[0], ex[0]);
+	assertf(in[1] == ex[1], "%s: test case %d: vec[1] = %f: expected %f", fname, test_case, in[1], ex[1]);
+	assertf(in[2] == ex[2], "%s: test case %d: vec[2] = %f: expected %f", fname, test_case, in[2], ex[2]);
+	++test_case;
+}
+void test_vector3_f32_transform_matrix3_f32() {
+	char fname[] = "mdwi_vector3_f32_transform_matrix3_f32";
+
+	Vector3_F32 vec = {  1.0,
+											 2.0,
+											 3.0 };
+	Matrix3_F32 mat = { {1.0, 0.0, 0.0},
+											{0.0, 1.0, 0.0},
+											{0.0, 0.0, 1.0} };
+	Vector3_F32 ex =  {  1.0,
+											 2.0,
+	                     3.0 };
+
+	_test_vector3_f32_transform_matrix3_f32(fname, vec, mat, ex);
+
+	mat[0][0] = 0.0; mat[1][0] = 0.0; mat[2][0] = 1.0; vec[0] = 2.5; ex[0] = 7.5; 
+	mat[0][1] = 0.0; mat[1][1] = 1.0; mat[2][1] = 0.0; vec[1] = 3.1; ex[1] = 3.1;
+	mat[0][2] = 1.0; mat[1][2] = 0.0; mat[2][2] = 0.0; vec[2] = 7.5; ex[2] = 2.5;
+	_test_vector3_f32_transform_matrix3_f32(fname, vec, mat, ex);
+
+	pass("%s", fname);
+}
+
+void _test_vector4_f32_transform_matrix4_f32(const char *fname, Vector4_F32 in, Matrix4_F32 mat, Vector4_F32 ex) {
+	static int test_case = 1;
+	mdwi_vector4_f32_transform_matrix4_f32(in, mat);
+	assertf(in[0] == ex[0], "%s: test case %d: vec[0] = %f: expected %f", fname, test_case, in[0], ex[0]);
+	assertf(in[1] == ex[1], "%s: test case %d: vec[1] = %f: expected %f", fname, test_case, in[1], ex[1]);
+	assertf(in[2] == ex[2], "%s: test case %d: vec[2] = %f: expected %f", fname, test_case, in[2], ex[2]);
+	assertf(in[3] == ex[3], "%s: test case %d: vec[3] = %f: expected %f", fname, test_case, in[3], ex[3]);
+	++test_case;
+}
+void test_vector4_f32_transform_matrix4_f32() {
+	char fname[] = "mdwi_vector4_f32_transform_matrix4_f32";
+
+	Vector4_F32 vec = {  1.0,
+											 2.0,
+											 3.0,
+	                     4.0 };
+	Matrix4_F32 mat = { {1.0, 0.0, 0,0, 0.0},
+											{0.0, 1.0, 0.0, 0.0},
+											{0.0, 0.0, 1.0, 0.0},
+	                    {0.0, 0.0, 0.0, 1.0} };
+	Vector4_F32 ex =  {  1.0,
+											 2.0,
+	                     3.0,
+		                   4.0 };
+	_test_vector4_f32_transform_matrix4_f32(fname, vec, mat, ex);
+
+	mat[0][0] = 0.0; mat[1][0] = 0.0; mat[2][0] = 0.0; mat[3][0] = 1.0; vec[0] = 2.5; ex[0] = 9.3; 
+	mat[0][1] = 0.0; mat[1][1] = 0.0; mat[2][1] = 1.0; mat[3][1] = 0.0; vec[1] = 3.1; ex[1] = 7.5;
+	mat[0][2] = 0.0; mat[1][2] = 1.0; mat[2][2] = 0.0; mat[3][2] = 0.0; vec[2] = 7.5; ex[2] = 3.1;
+	mat[0][3] = 1.0; mat[1][3] = 0.0; mat[2][3] = 0.0; mat[3][3] = 0.0; vec[3] = 9.3; ex[3] = 2.5;
+	_test_vector4_f32_transform_matrix4_f32(fname, vec, mat, ex);
+
+	pass("%s", fname);
+}
+
+
 int main() {
 	test_vector2_f32_scale();
 	test_vector3_f32_scale();
 	test_vector4_f32_scale();
+
+	test_vector2_f32_transform_matrix2_f32();
+	test_vector3_f32_transform_matrix3_f32();
+	test_vector4_f32_transform_matrix4_f32();
 
 	exit(failed_tests);
 }
