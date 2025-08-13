@@ -304,6 +304,7 @@ int main() {
 	test_vector4_f32_transform_matrix4_f32();
 
 	test_matrix3_f32_translate();
+	test_matrix4_f32_translate();
 
 	exit(failed_tests);
 }
