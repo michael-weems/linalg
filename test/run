@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 
+pushd "$(dirname "$(readlink -f "$BASH_SOURCE")")" &> /dev/null
+
 gcc linalg.c -o test_linalg.out
 ./test_linalg.out
 if [ $? != 0 ]; then
