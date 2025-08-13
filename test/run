@@ -7,7 +7,9 @@ gcc linalg.c -o test_linalg.out
 failed_count=$?
 if [ $failed_count != 0 ]; then
 	echo -e "\x1B[31mFAIL >>\x1B[0m $failed_count assertions failed: check above logs for details"
+	rm *.out
 	exit 1
 fi
 echo -e "\x1B[32mALL TESTS PASS\x1B[0m"
+rm *.out
 exit 0

@@ -14,6 +14,8 @@ typedef float Matrix3_F32[3][3];
 typedef float Matrix4_F32[4][4];
 
 extern void mdwi_vector2_f32_scale               (Vector2_F32 v, float scalar);
+extern void mdwi_vector3_f32_scale               (Vector3_F32 v, float scalar);
+extern void mdwi_vector4_f32_scale               (Vector4_F32 v, float scalar);
 
 //
 //
@@ -32,6 +34,19 @@ extern void mdwi_vector2_f32_scale               (Vector2_F32 v, float scalar);
 inline void mdwi_vector2_f32_scale(Vector2_F32 v, float scalar) {
 	v[0] *= scalar;
 	v[1] *= scalar;
+}
+
+inline void mdwi_vector3_f32_scale(Vector3_F32 v, float scalar) {
+	v[0] *= scalar;
+	v[1] *= scalar;
+	v[2] *= scalar;
+}
+
+inline void mdwi_vector4_f32_scale(Vector4_F32 v, float scalar) {
+	v[0] *= scalar;
+	v[1] *= scalar;
+	v[2] *= scalar;
+	v[3] *= scalar;
 }
 
 #endif // MDW_LINALG_IMPLEMENTATION
