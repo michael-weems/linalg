@@ -294,6 +294,69 @@ void test_matrix4_f32_translate() {
 	else fail("%s", fname);
 }
 
+int _test_matrix2_f32_determinant(const char *fname, Matrix2_F32 in, float ex) {
+	static int test_case = 1;
+	int err = 0;
+	float res = mdwi_matrix2_f32_determinant(in);
+	err += assertf(res == ex, "%s: test case %d: res = %f: expected %f", fname, test_case, res, ex);
+	++test_case;
+	return err;
+}
+void test_matrix2_f32_determinant() {
+	char fname[] = "mdwi_matrix2_f32_determinant";
+	int err = 0;
+
+	Matrix2_F32 mat = { {1.0, 0.0},
+	                    {0.0, 1.0} };
+	float ex = 1.0;
+	err += _test_matrix2_f32_determinant(fname, mat, ex);
+
+	mat[0][0] = 1.0; mat[1][0] = 1.0;
+	mat[0][1] = 1.0; mat[1][1] = 1.0;
+	ex = 0.0;
+	err += _test_matrix2_f32_determinant(fname, mat, ex);
+
+	mat[0][0] = 7.5; mat[1][0] = 2.5;
+	mat[0][1] = 4.0; mat[1][1] = 2.0;
+	ex = 5.0;
+	err += _test_matrix2_f32_determinant(fname, mat, ex);
+	
+	// TODO: more test cases
+
+	if (err == 0) pass("%s", fname);
+	else fail("%s", fname);
+}
+
+int _test_matrix3_f32_determinant(const char *fname, Matrix3_F32 in, float ex) {
+	static int test_case = 1;
+	int err = 0;
+	float res = mdwi_matrix3_f32_determinant(in);
+	err += assertf(res == ex, "%s: test case %d: res = %f: expected %f", fname, test_case, res, ex);
+	++test_case;
+	return err;
+}
+void test_matrix3_f32_determinant() {
+	char fname[] = "mdwi_matrix3_f32_determinant";
+	int err = 0;
+
+	Matrix3_F32 mat = { {1.0, 1.0, 1.0},
+	                    {1.0, 1.0, 1.0},
+	                    {1.0, 1.0, 1.0} };
+	float ex = 0.0;
+	err += _test_matrix3_f32_determinant(fname, mat, ex);
+
+	mat[0][0] = 1.0; mat[1][0] = 1.0; mat[2][0] = 1.0;
+	mat[0][1] = 1.0; mat[1][1] = 1.0; mat[2][1] = 1.0;
+	mat[0][2] = 1.0; mat[1][2] = 1.0; mat[2][2] = 1.0;
+	ex = 0.0;
+	err += _test_matrix3_f32_determinant(fname, mat, ex);
+
+	// TODO: better test cases
+
+	if (err == 0) pass("%s", fname);
+	else fail("%s", fname);
+}
+
 int main() {
 	test_vector2_f32_scale();
 	test_vector3_f32_scale();
@@ -305,6 +368,9 @@ int main() {
 
 	test_matrix3_f32_translate();
 	test_matrix4_f32_translate();
+
+	test_matrix2_f32_determinant();
+	test_matrix3_f32_determinant();
 
 	exit(failed_tests);
 }

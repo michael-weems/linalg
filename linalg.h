@@ -21,6 +21,18 @@ extern void mdwi_matrix4_f32_identity(Matrix4_F32 m);
 extern void mdwi_matrix3_f32_translate(Matrix3_F32 m, Vector2_F32 v); 
 extern void mdwi_matrix4_f32_translate(Matrix4_F32 m, Vector3_F32 v); 
 
+extern float mdwi_matrix2_f32_determinant(Matrix2_F32 m); 
+extern float mdwi_matrix3_f32_determinant(Matrix3_F32 m); 
+extern float mdwi_matrix4_f32_determinant(Matrix4_F32 m); 
+
+extern void mdwi_vector2_f32_dotproduct(Vector2_F32 a, Vector4_F32 b); 
+extern void mdwi_vector3_f32_dotproduct(Vector3_F32 a, Vector4_F32 b); 
+extern void mdwi_vector4_f32_dotproduct(Vector4_F32 a, Vector4_F32 b); 
+
+extern void mdwi_vector2_f32_crossproduct(Vector2_F32 a, Vector4_F32 b); 
+extern void mdwi_vector3_f32_crossproduct(Vector3_F32 a, Vector4_F32 b); 
+extern void mdwi_vector4_f32_crossproduct(Vector4_F32 a, Vector4_F32 b); 
+
 extern void mdwi_vector2_f32_scale  (Vector2_F32 v, float scalar);
 extern void mdwi_vector3_f32_scale  (Vector3_F32 v, float scalar);
 extern void mdwi_vector4_f32_scale  (Vector4_F32 v, float scalar);
@@ -28,6 +40,7 @@ extern void mdwi_vector4_f32_scale  (Vector4_F32 v, float scalar);
 extern void mdwi_vector2_f32_transform_matrix2_f32          (Vector2_F32 v, Matrix2_F32 m);
 extern void mdwi_vector3_f32_transform_matrix3_f32          (Vector3_F32 v, Matrix3_F32 m);
 extern void mdwi_vector4_f32_transform_matrix4_f32          (Vector4_F32 v, Matrix4_F32 m);
+
 
 //
 //
@@ -79,6 +92,38 @@ inline void mdwi_matrix4_f32_translate(Matrix4_F32 m, Vector3_F32 v) {
 	m[3][0] = v[0];
 	m[3][1] = v[1];
 	m[3][2] = v[2];
+}
+
+inline float mdwi_matrix2_f32_determinant(Matrix2_F32 m) {
+	return (m[0][0] * m[1][1]) - (m[1][0] * m[0][1]);
+}
+inline float mdwi_matrix3_f32_determinant(Matrix3_F32 m) {
+	return (m[0][0] * (m[1][1] * m[2][2]) - (m[2][1] * m[1][2])) 
+	     - (m[1][0] * (m[0][1] * m[2][2]) - (m[2][1] * m[0][2]))
+	     + (m[2][0] * (m[0][1] * m[1][2]) - (m[1][1] * m[0][2]));
+}
+inline float mdwi_matrix4_f32_determinant(Matrix4_F32 m) {
+	// TODO:
+}
+
+inline void mdwi_vector2_f32_dotproduct(Vector2_F32 a, Vector4_F32 b) {
+	// TODO:
+}
+inline void mdwi_vector3_f32_dotproduct(Vector3_F32 a, Vector4_F32 b) {
+	// TODO:
+}
+inline void mdwi_vector4_f32_dotproduct(Vector4_F32 a, Vector4_F32 b) {
+	// TODO:
+}
+
+inline void mdwi_vector2_f32_crossproduct(Vector2_F32 a, Vector4_F32 b) {
+	// TODO:
+}
+inline void mdwi_vector3_f32_crossproduct(Vector3_F32 a, Vector4_F32 b) {
+	// TODO:
+}
+inline void mdwi_vector4_f32_crossproduct(Vector4_F32 a, Vector4_F32 b) {
+	// TODO:
 }
 
 inline void mdwi_vector2_f32_scale(Vector2_F32 v, float scalar) {
